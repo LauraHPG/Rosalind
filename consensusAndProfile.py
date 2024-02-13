@@ -1,9 +1,9 @@
-file = open("./datasets/prova.txt", 'r')
+import auxiliaryMethods as fnc
 
-identifier = file.readline()
-string = file.readline()
+dataset = fnc.readFasta("./datasets/rosalind_cons.txt")
 
-n = len(string)-1
+string = dataset.popitem()[1]
+n = len(string)
 
 matrix = {}
 matrix['A'] = [0]*n
@@ -11,13 +11,14 @@ matrix['C'] = [0]*n
 matrix['G'] = [0]*n
 matrix['T'] = [0]*n
 
-while string:
+for i, char in enumerate(string):
+    matrix[char][i] += 1
+    
+while dataset:
+    string = dataset.popitem()[1]
     for i, char in enumerate(string):
-        if char != '\n':
-           matrix[char][i] += 1
+        matrix[char][i] += 1
 
-    identifier = file.readline()
-    string = file.readline()
 
 consensusString = str()
 
@@ -42,19 +43,19 @@ for i in range(0,n):
 print(consensusString)
 print('A:', end="")
 for num in matrix['A']:
-    print(' ', num, end="")
+    print('', num, end="")
 print()
 print('C:', end="")
 for num in matrix['C']:
-    print(' ', num, end="")
+    print('', num, end="")
 print()
 print('G:', end="")
 for num in matrix['G']:
-    print(' ', num, end="")
+    print('', num, end="")
 print()
 print('T:', end="")
 for num in matrix['T']:
-    print(' ', num, end="")
+    print('', num, end="")
 print()
 
 
