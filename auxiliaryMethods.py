@@ -7,6 +7,10 @@ def readFasta(folder):
     result = {}
 
     identifier = line[1:]
+
+    identifier = re.sub(r'[^\w]', ' ', identifier)
+    identifier = re.sub(r"\s+", "", identifier)
+    
     result[identifier] = str()
     
     line = content.readline()
@@ -22,7 +26,12 @@ def readFasta(folder):
         if not line:
             break 
         if line[0] == '>':
+            
             identifier = line[1:]
+
+            identifier = re.sub(r'[^\w]', ' ', identifier)
+            identifier = re.sub(r"\s+", "", identifier)
+
             result[identifier] = str()
             line = content.readline()
 
