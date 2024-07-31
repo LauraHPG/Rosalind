@@ -1,6 +1,9 @@
 import re
 
 def readFasta(folder):
+    '''
+    returns map of {identifier: string}
+    '''
     content = open(folder, 'r')
 
     line = content.readline()
@@ -36,3 +39,9 @@ def readFasta(folder):
             line = content.readline()
 
     return result
+
+def getOnlyStrings(folder):
+    '''
+    returns a list with all the strings
+    '''
+    return list(readFasta(folder).values())
